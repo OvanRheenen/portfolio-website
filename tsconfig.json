@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
+			"@app/*": ["./app/(app)/*"],
 			"@payload-config": ["./payload.config.ts"]
     }
   },
