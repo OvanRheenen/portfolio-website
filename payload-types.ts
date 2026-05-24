@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    media: Media;
     works: Work;
     'payload-kv': PayloadKv;
     users: User;
@@ -76,6 +77,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    media: MediaSelect<false> | MediaSelect<true>;
     works: WorksSelect<false> | WorksSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -119,12 +121,11 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "works".
+ * via the `definition` "media".
  */
-export interface Work {
+export interface Media {
   id: number;
-  title: string;
-  description?: string | null;
+  altText?: string | null;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -137,6 +138,21 @@ export interface Work {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "works".
+ */
+export interface Work {
+  id: number;
+  title: string;
+  description?: string | null;
+  category: '2d' | '3d';
+  active?: boolean | null;
+  imageWithPunchhole: number | Media;
+  punchholeCutout: number | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -187,6 +203,10 @@ export interface User {
 export interface PayloadLockedDocument {
   id: number;
   document?:
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
     | ({
         relationTo: 'works';
         value: number | Work;
@@ -239,11 +259,10 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "works_select".
+ * via the `definition` "media_select".
  */
-export interface WorksSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
+export interface MediaSelect<T extends boolean = true> {
+  altText?: T;
   prefix?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -256,6 +275,20 @@ export interface WorksSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "works_select".
+ */
+export interface WorksSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  category?: T;
+  active?: T;
+  imageWithPunchhole?: T;
+  punchholeCutout?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

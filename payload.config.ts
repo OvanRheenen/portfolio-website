@@ -2,13 +2,14 @@ import sharp from 'sharp';
 import { buildConfig } from 'payload';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { Works } from './collections/Works';
+import { Media, Works } from '@/collections';
 import { s3Storage } from '@payloadcms/storage-s3';
 
 export default buildConfig({
   editor: lexicalEditor(),
   
 	collections: [
+		Media,
 		Works,
 	],
   
@@ -25,8 +26,8 @@ export default buildConfig({
 	plugins: [
 		s3Storage({
 			collections: {
-				works: {
-					prefix: 'works',
+				media: {
+					prefix: 'media',
 				}
 			},
 			bucket: process.env.S3_BUCKET || '',

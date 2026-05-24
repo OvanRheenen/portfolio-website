@@ -1,8 +1,7 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig } from 'payload';
 
 export const Works: CollectionConfig = {
   slug: 'works',
-	upload: true,
   fields: [
     {
       name: 'title',
@@ -12,6 +11,34 @@ export const Works: CollectionConfig = {
 		{
 			name: 'description',
 			type: 'textarea',
+		},
+		{
+			name: 'category',
+			type: 'select',
+			options: [
+				{ label: '2D', value: '2d' },
+				{ label: '3D', value: '3d' },
+			],
+			required: true,
+		},
+		{
+			name: 'active',
+			type: 'checkbox',
+			defaultValue: false,
+		},
+		{
+			name: 'imageWithPunchhole',
+			type: 'upload',
+			relationTo: 'media',
+			required: true,
+		 	label: 'Image with Punchhole',
+		},
+		{
+			name: 'punchholeCutout',
+			type: 'upload',
+			relationTo: 'media',
+			required: true,
+		 	label: 'Punchhole Cutout',
 		},
   ],
 };
