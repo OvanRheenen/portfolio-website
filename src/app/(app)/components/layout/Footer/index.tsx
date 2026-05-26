@@ -2,6 +2,7 @@
 
 import styles from "./Footer.module.css";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navItems = {
 	'/': 				{ name: 'home'},
@@ -10,14 +11,19 @@ const navItems = {
 }
 
 export default function Footer() {
+	const pathname = usePathname();
+
 	return (
 		<footer>
 			<nav className={styles['footer-nav']}>
-				{Object.entries(navItems).map(([path, { name }]) => (
-					<Link key={path} href={path}>
-						{name}
-					</Link>
-				))}
+				{Object.entries(navItems).map(([path, { name }]) => {
+        	if (path === pathname) return null;
+        	return (
+          	<Link key={path} href={path}>
+            	{name}
+          	</Link>
+        	);
+      	})}
 			</nav>
 		</footer>
 	);
