@@ -2,18 +2,18 @@
 	width: 50%;
 }
 
+/* TODO add hover effect (highlight only 2d/3d items) */
 .header-nav {
-  background: var(--header-bg);
+	background: var(--header-bg);
   color: var(--header-text);
 
 	display: flex;
 	gap: var(--header-nav-item-spacing);
 	width: 50%;
 	text-align: left;
-}
 
-/* TODO add hover effect (highlight only 2d/3d items) */
-.header-nav a {
-  color: inherit;
-  text-decoration: none;
+  a {
+		color: inherit;
+		&:hover { text-decoration: underline; }
+	}
 }

@@ -1,14 +1,16 @@
-import styles from "./Header.module.css";
+'use client';
+
+import styles from "./Header.module.scss";
+import { usePathname } from "next/navigation";
+import HomeHeaderNav from "./HomeHeaderNav";
 
 export default function Header() {
+	const pathname = usePathname();
+
 	return (
 		<header>
-			<div className={styles.headerTitle}>Nina Merk</div>
-			{/* TODO: nav only on homepage */}
-			<nav className={styles['header-nav']}>
-				<a href="#2d">2D</a>
-				<a href="#3d">3D</a>
-			</nav>
+			<div className={styles['header-title']}>Nina Merk</div>
+			{pathname === "/" && <HomeHeaderNav />}
 		</header>
 	);
 }

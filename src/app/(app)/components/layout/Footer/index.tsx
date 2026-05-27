@@ -1,6 +1,6 @@
 'use client';
 
-import styles from "./Footer.module.css";
+import styles from "./Footer.module.scss";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

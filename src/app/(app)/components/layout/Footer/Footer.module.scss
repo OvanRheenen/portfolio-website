@@ -1,0 +1,15 @@
+.footer-nav {
+	background: var(--footer-bg);
+	color: var(--footer-text);
+	font-family: var(--footer-font);
+	
+	display: flex;
+  gap: var(--footer-nav-item-spacing);
+	text-align: left;
+  align-items: center; /* Vertically center links */
+
+	a {
+		color: inherit;
+		&:hover { text-decoration: underline; }
+	}
+}
