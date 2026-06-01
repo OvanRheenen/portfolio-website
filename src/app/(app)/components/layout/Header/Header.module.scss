@@ -1,18 +1,16 @@
-.header-title {
-	width: 50%;
+.headerTitle {
+	width: var(--split-width);
 }
 
 /* TODO add hover effect (highlight only 2d/3d items) */
-.header-nav {
-	background: var(--header-bg);
-  color: var(--header-text);
-
+.headerNav {
 	display: flex;
 	gap: var(--header-nav-item-spacing);
-	width: 50%;
+	width: var(--split-width);
 	text-align: left;
+	padding-left: var(--bar-padding);
 
-  a {
+	a {
 		color: inherit;
 		&:hover { text-decoration: underline; }
 	}

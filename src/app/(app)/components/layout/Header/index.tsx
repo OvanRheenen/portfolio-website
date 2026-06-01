@@ -9,7 +9,7 @@ export default function Header() {
 
 	return (
 		<header>
-			<div className={styles['header-title']}>Nina Merk</div>
+			<div className={styles.headerTitle}>Nina Merk</div>
 			{pathname === "/" && <HomeHeaderNav />}
 		</header>
 	);

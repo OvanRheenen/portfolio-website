@@ -1,12 +1,10 @@
-.footer-nav {
-	background: var(--footer-bg);
-	color: var(--footer-text);
+.footerNav {
 	font-family: var(--footer-font);
-	
+
 	display: flex;
-  gap: var(--footer-nav-item-spacing);
+	gap: var(--footer-nav-item-spacing);
 	text-align: left;
-  align-items: center; /* Vertically center links */
+	align-items: center;
 
 	a {
 		color: inherit;
