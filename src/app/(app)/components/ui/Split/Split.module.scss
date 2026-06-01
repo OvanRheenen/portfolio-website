@@ -1,0 +1,32 @@
+.body {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	overflow: hidden;
+}
+
+.left {
+	position: relative;
+	width: var(--split-width);
+	height: 100%;
+	padding: 0 var(--bar-padding);
+}
+
+.right {
+	position: relative;
+	width: var(--split-width);
+	height: 100%;
+	padding: 0 var(--bar-padding);
+}
+
+/* below md the split hands off to a single stacked column */
+@media (max-width: 768px) { // TODO remove hardcoded breakpoint
+	.body {
+		flex-direction: column;
+	}
+	.left,
+	.right {
+		width: 100%;
+		flex: 1 1 auto;
+	}
+}
