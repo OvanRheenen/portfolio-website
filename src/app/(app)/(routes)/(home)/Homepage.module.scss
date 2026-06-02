@@ -4,6 +4,12 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
+  transition: opacity var(--transition-fast) ease;
+}
+
+.isFaded {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .dot {

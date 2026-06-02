@@ -6,6 +6,7 @@ import type { Work } from './components/types'
 import { Dotfield, SelectedPanel, WorkPreview } from './components'
 import Split from '@app/components/ui/Split'
 import { MOCK_WORKS } from './components/types'
+import { useFilter } from './components/filterStore'
 
 function randomPositions(count: number) {
   return Array.from({ length: count }, () => ({
@@ -18,6 +19,7 @@ export default function HomepageBody() {
   const [hovered, setHovered] = useState<string | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
   const [positions, setPositions] = useState<Array<{ x: number; y: number }> | null>(null)
+  const { effective } = useFilter()
 
   useEffect(() => {
     setPositions(randomPositions(MOCK_WORKS.length))
@@ -38,6 +40,7 @@ export default function HomepageBody() {
           <SelectedPanel
             works={MOCK_WORKS}
             selectedWork={selectedWork}
+            filter={effective}
             onClose={() => { setSelected(null); setHovered(null) }}
             onSelect={setSelected}
           />
@@ -46,6 +49,7 @@ export default function HomepageBody() {
             <Dotfield
               works={MOCK_WORKS}
               positions={positions}
+              filter={effective}
               onHover={setHovered}
               onSelect={(id) => { setHovered(null); setSelected(id) }}
             />
