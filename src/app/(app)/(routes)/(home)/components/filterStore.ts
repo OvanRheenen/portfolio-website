@@ -33,6 +33,13 @@ export function toggleLock(cat: string) {
   emit()
 }
 
+export function resetFilter() {
+  if (hover === null && locked === null) return
+  hover = null
+  locked = null
+  emit()
+}
+
 function getEffective(): Category {
   return hover ?? locked
 }

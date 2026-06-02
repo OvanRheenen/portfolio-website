@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import styles from './Homepage.module.scss'
-import type { Work } from './components/types'
 import { Dotfield, SelectedPanel, WorkPreview } from './components'
-import Split from '@app/components/ui/Split'
+import { useFilter, resetFilter } from './components/filterStore'
+import type { Work } from './components/types'
 import { MOCK_WORKS } from './components/types'
-import { useFilter } from './components/filterStore'
+import Split from '@app/components/ui/Split'
 
 function randomPositions(count: number) {
   return Array.from({ length: count }, () => ({
@@ -24,6 +24,8 @@ export default function HomepageBody() {
   useEffect(() => {
     setPositions(randomPositions(MOCK_WORKS.length))
   }, [])
+
+  useEffect(() => resetFilter, [])
 
   const selectedWork: Work | null = selected
     ? (MOCK_WORKS.find(w => w.id === selected) ?? null)
