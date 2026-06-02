@@ -149,8 +149,18 @@ export interface Work {
   description?: string | null;
   category: '2d' | '3d';
   active?: boolean | null;
-  imageWithPunchhole: number | Media;
-  punchholeCutout: number | Media;
+  /**
+   * This image will be used as a preview when its corresponding punchhole is hovered over, it should be an image with a punchhole cutout.
+   */
+  previewImage: number | Media;
+  /**
+   * This image will be used in the homepage overview as one of the spread around dots.
+   */
+  punchholeImage: number | Media;
+  /**
+   * These images will be used in the project detail view, when a user clicks on a project dot.
+   */
+  projectImages?: (number | Media)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -285,8 +295,9 @@ export interface WorksSelect<T extends boolean = true> {
   description?: T;
   category?: T;
   active?: T;
-  imageWithPunchhole?: T;
-  punchholeCutout?: T;
+  previewImage?: T;
+  punchholeImage?: T;
+  projectImages?: T;
   updatedAt?: T;
   createdAt?: T;
 }
