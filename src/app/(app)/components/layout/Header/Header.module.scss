@@ -1,5 +1,12 @@
 .headerTitle {
 	width: var(--split-width);
+	color: inherit;
+
+	a {
+		color: inherit;
+		cursor: pointer;
+		&:hover { text-decoration: underline; }
+	}
 }
 
 /* TODO add hover effect (highlight only 2d/3d items) */
