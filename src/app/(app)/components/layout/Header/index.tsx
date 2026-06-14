@@ -1,6 +1,7 @@
 'use client';
 
 import styles from "./Header.module.scss";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HomeHeaderNav from "./HomeHeaderNav";
 
@@ -19,7 +20,7 @@ export default function Header() {
 				</>
 			) : (
 				<div className={styles.headerTitle}>
-					<a href="/">{title}</a>
+					<Link href="/">{title}</Link>
 				</div>
 			)}
 		</header>

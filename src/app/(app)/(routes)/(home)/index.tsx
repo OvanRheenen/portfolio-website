@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import styles from './Homepage.module.scss'
-import { Dotfield, SelectedPanel, WorkPreview } from './components'
+import { Dotfield, SelectedPanel, WorkPreview, WorkGallery } from './components'
 import { useFilter, resetFilter } from './components/filterStore'
 import type { Work } from './components/types'
-import { MOCK_WORKS } from './components/types'
 import Split from '@app/components/ui/Split'
 
 function randomPositions(count: number) {
@@ -15,24 +14,29 @@ function randomPositions(count: number) {
   }))
 }
 
-export default function HomepageBody() {
+type Props = { works: Work[] }
+
+export default function HomepageBody({ works }: Props) {
   const [hovered, setHovered] = useState<string | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
   const [positions, setPositions] = useState<Array<{ x: number; y: number }> | null>(null)
   const { effective } = useFilter()
 
   useEffect(() => {
-    setPositions(randomPositions(MOCK_WORKS.length))
-  }, [])
+    // Client-only: randomPositions uses Math.random(), so it must run after mount
+    // to avoid a server/client hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPositions(randomPositions(works.length))
+  }, [works.length])
 
   useEffect(() => resetFilter, [])
 
   const selectedWork: Work | null = selected
-    ? (MOCK_WORKS.find(w => w.id === selected) ?? null)
+    ? (works.find(w => w.id === selected) ?? null)
     : null
 
   const activeWork: Work | null = selectedWork
-    ?? (hovered ? (MOCK_WORKS.find(w => w.id === hovered) ?? null) : null)
+    ?? (hovered ? (works.find(w => w.id === hovered) ?? null) : null)
 
   return (
     <Split
@@ -40,7 +44,7 @@ export default function HomepageBody() {
       left={
         selected && selectedWork ? (
           <SelectedPanel
-            works={MOCK_WORKS}
+            works={works}
             selectedWork={selectedWork}
             filter={effective}
             onClose={() => { setSelected(null); setHovered(null) }}
@@ -49,7 +53,7 @@ export default function HomepageBody() {
         ) : (
           positions && (
             <Dotfield
-              works={MOCK_WORKS}
+              works={works}
               positions={positions}
               filter={effective}
               onHover={setHovered}
@@ -59,11 +63,15 @@ export default function HomepageBody() {
         )
       }
       right={
-        activeWork && (
-          <WorkPreview
-						key={selected ?? hovered}
-						work={activeWork}
-					/>
+        selected && selectedWork && selectedWork.projectImages.length > 0 ? (
+          <WorkGallery key={selected} work={selectedWork} />
+        ) : (
+          activeWork && (
+            <WorkPreview
+              key={selected ?? hovered}
+              work={activeWork}
+            />
+          )
         )
       }
     />

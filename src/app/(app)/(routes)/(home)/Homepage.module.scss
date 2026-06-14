@@ -4,7 +4,13 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
   transition: opacity var(--transition-fast) ease;
+}
+
+.cover {
+  object-fit: cover;
 }
 
 .isFaded {
@@ -19,6 +25,8 @@
 }
 
 .image {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   border-radius: 0;
@@ -82,7 +90,7 @@
   opacity: var(--opacity-muted);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-main);
 }
 
 .title {
@@ -97,5 +105,20 @@
   line-height: 1.7;
   opacity: var(--opacity-subtle);
   margin: 0;
-  max-width: 38ch;
+}
+
+.gallery {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+  animation: fadeIn var(--transition-fast) ease;
+}
+
+.projectImage {
+  width: 100%;
+  height: auto;
+  display: block;
 }

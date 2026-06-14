@@ -147,7 +147,12 @@ export interface Work {
   id: number;
   title: string;
   description?: string | null;
+  /**
+   * The year the project was completed.
+   */
+  year: number;
   category: '2d' | '3d';
+  medium: string;
   active?: boolean | null;
   /**
    * This image will be used as a preview when its corresponding punchhole is hovered over, it should be an image with a punchhole cutout.
@@ -158,7 +163,7 @@ export interface Work {
    */
   punchholeImage: number | Media;
   /**
-   * These images will be used in the project detail view, when a user clicks on a project dot.
+   * These images will be used in the project detail view, after a user has clicked on a project dot.
    */
   projectImages?: (number | Media)[] | null;
   updatedAt: string;
@@ -293,7 +298,9 @@ export interface MediaSelect<T extends boolean = true> {
 export interface WorksSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  year?: T;
   category?: T;
+  medium?: T;
   active?: T;
   previewImage?: T;
   punchholeImage?: T;

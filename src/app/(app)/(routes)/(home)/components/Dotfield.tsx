@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import styles from '../Homepage.module.scss'
 import type { Work } from './types'
 
@@ -25,7 +26,6 @@ export default function DotField({
 						key={work.id}
 						className={`${styles.dot} ${faded && styles.isFaded}`}
 						style={{
-							backgroundColor: work.color,
 							left: `${positions[i].x}%`,
 							top: `${positions[i].y}%`,
 						}}
@@ -33,7 +33,10 @@ export default function DotField({
 						onMouseEnter={() => onHover(work.id)}
 						onMouseLeave={() => onHover(null)}
 						onClick={() => onSelect(work.id)}
-					/>
+					>
+						{/* keep sizes in sync with --dot-size in globals.css */}
+						<Image src={work.punchholeUrl} alt={work.title} fill sizes="30px" className={styles.cover} />
+					</button>
 				)
 			})}
 		</>

@@ -13,12 +13,28 @@ export const Works: CollectionConfig = {
 			type: 'textarea',
 		},
 		{
+			name: 'year',
+			type: 'number',
+			min: 2003,
+			max: 2103,
+			required: true,
+			admin: {
+				description: 'The year the project was completed.',
+			},
+			defaultValue: new Date().getFullYear(),
+		},
+		{
 			name: 'category',
-			type: 'select',
+			type: 'radio',
 			options: [
 				{ label: '2D', value: '2d' },
 				{ label: '3D', value: '3d' },
 			],
+			required: true,
+		},
+		{
+			name: 'medium',
+			type: 'text',
 			required: true,
 		},
 		{
@@ -53,7 +69,7 @@ export const Works: CollectionConfig = {
 			hasMany: true,
 		 	label: 'Project Display Images',
 			admin: {
-				description: 'These images will be used in the project detail view, when a user clicks on a project dot.',
+				description: 'These images will be used in the project detail view, after a user has clicked on a project dot.',
 			},
 		},
   ],
