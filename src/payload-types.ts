@@ -89,8 +89,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    contact: Contact;
+  };
+  globalsSelect: {
+    contact: ContactSelect<false> | ContactSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -369,6 +373,52 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  /**
+   * Each row: a medium (e.g. Email), a value (e.g. nina@mail.com), and an optional link (e.g. mailto:nina@mail.com or a profile URL). Leave link empty for a plain, non-clickable row like "Based in".
+   */
+  links?:
+    | {
+        /**
+         * e.g. Email, Instagram, Based in
+         */
+        medium: string;
+        /**
+         * e.g. nina@mail.com, @ninamerk, Amsterdam / Warsaw
+         */
+        value: string;
+        /**
+         * Optional. e.g. mailto:nina@mail.com or https://instagram.com/ninamerk. Empty = non-link row.
+         */
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  links?:
+    | T
+    | {
+        medium?: T;
+        value?: T;
+        link?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
