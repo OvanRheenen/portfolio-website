@@ -14,6 +14,12 @@ const __dirname = path.dirname(__filename);
 export default buildConfig({
   editor: lexicalEditor(),
 
+  upload: {
+    limits: {
+      fileSize: 50_000_000, // 50MB, match Supabase bucket
+    },
+  },
+
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -39,6 +45,7 @@ export default buildConfig({
 	
 	plugins: [
 		s3Storage({
+			clientUploads: true,
 			collections: {
 				media: {
 					prefix: 'media',
