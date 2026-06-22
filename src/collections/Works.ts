@@ -41,6 +41,9 @@ export const Works: CollectionConfig = {
 			name: 'active',
 			type: 'checkbox',
 			defaultValue: false,
+			admin: {
+				description: 'If checked, this project will be shown on the homepage.',
+			},
 		},
 		{
 			name: 'previewImage',

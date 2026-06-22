@@ -159,6 +159,9 @@ export interface Work {
   year: number;
   category: '2d' | '3d';
   medium: string;
+  /**
+   * If checked, this project will be shown on the homepage.
+   */
   active?: boolean | null;
   /**
    * This image will be used as a preview when its corresponding punchhole is hovered over, it should be an image with a punchhole cutout.
