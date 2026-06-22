@@ -4,6 +4,7 @@ import { withPayload } from '@payloadcms/next/withPayload';
 const supabaseHost = new URL(process.env.S3_ENDPOINT!).hostname;
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: process.env.DEV_ORIGINS?.split(','),
   images: {
     remotePatterns: [
       {
