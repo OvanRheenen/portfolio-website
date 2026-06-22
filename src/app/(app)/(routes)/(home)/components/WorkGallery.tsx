@@ -7,11 +7,12 @@ type Props = { work: Work }
 export default function WorkGallery({ work }: Props) {
   return (
     <div className={styles.gallery}>
-      {work.projectImages.map(img => (
+      {work.projectImages.map((img, i) => (
         <ProjectMedia
           key={img.url}
           asset={img}
           title={work.title}
+          eager={i === 0}
           className={styles.projectImage}
         />
       ))}

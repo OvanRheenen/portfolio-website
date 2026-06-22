@@ -31,8 +31,8 @@ export default function ProjectMedia({ asset, title, className, fill, sizes, eag
   }
 
   return fill ? (
-    <Image src={asset.url} alt={title} fill sizes={sizes} loading={eager ? 'eager' : undefined} className={className} />
+    <Image src={asset.url} alt={title} fill sizes={sizes} priority={eager} className={className} />
   ) : (
-    <Image src={asset.url} alt={title} width={asset.width} height={asset.height} className={className} />
+    <Image src={asset.url} alt={title} width={asset.width} height={asset.height} priority={eager} className={className} />
   )
 }
