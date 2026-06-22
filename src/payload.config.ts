@@ -5,7 +5,7 @@ import { buildConfig } from 'payload';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { Media, Works } from '@/collections';
-import { Contact } from '@/globals';
+import { About, Contact } from '@/globals';
 import { s3Storage } from '@payloadcms/storage-s3';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -30,6 +30,7 @@ export default buildConfig({
 	],
 
 	globals: [
+		About,
 		Contact,
 	],
 

@@ -90,9 +90,11 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
+    about: About;
     contact: Contact;
   };
   globalsSelect: {
+    about: AboutSelect<false> | AboutSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
   };
   locale: null;
@@ -167,7 +169,7 @@ export interface Work {
    */
   punchholeImage: number | Media;
   /**
-   * These images will be used in the project detail view, after a user has clicked on a project dot.
+   * Images or videos (.mp4 / .webm) shown in the project detail view after a user clicks a project dot. Videos autoplay muted on loop. Order here is the display order.
    */
   projectImages?: (number | Media)[] | null;
   updatedAt: string;
@@ -376,6 +378,35 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: number;
+  /**
+   * A short title or role description, e.g. "Mixed Media Artist & Designer".
+   */
+  role: string;
+  /**
+   * A short (current) location description, e.g. "Amsterdam / Warsaw".
+   */
+  location: string;
+  /**
+   * A short one-sentence description. Displayed in clearer font at the top of the bio.
+   */
+  lead?: string | null;
+  /**
+   * The main bio, split up in paragraphs. Displayed as separate paragraphs on the about page.
+   */
+  paragraphs: {
+    paragraph?: string | null;
+    id?: string | null;
+  }[];
+  photo: number | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact".
  */
 export interface Contact {
@@ -402,6 +433,25 @@ export interface Contact {
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  role?: T;
+  location?: T;
+  lead?: T;
+  paragraphs?:
+    | T
+    | {
+        paragraph?: T;
+        id?: T;
+      };
+  photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

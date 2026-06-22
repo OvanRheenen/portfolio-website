@@ -45,3 +45,12 @@ export async function getWorks(): Promise<Work[]> {
     })
     .filter((w): w is Work => w !== null)
 }
+
+export async function getWorksCount(): Promise<number> {
+  const payload = await getPayload({ config })
+  const { totalDocs } = await payload.count({
+    collection: 'works',
+    where: { active: { equals: true } },
+  })
+  return totalDocs
+}
