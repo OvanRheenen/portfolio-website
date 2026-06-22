@@ -1,3 +1,5 @@
+@use '@app/styles/typography' as *;
+
 .content {
 	height: 100%;
 	padding: 2rem;
@@ -14,11 +16,9 @@
 }
 
 .role {
+  @extend %meta-label;
   font-family: var(--font-geist-mono);
   font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  opacity: var(--opacity-muted);
 }
 
 .lead {
@@ -30,10 +30,8 @@
 }
 
 .paragraph {
+  @extend %body-text;
   font-size: 1.2rem;
-  line-height: 1.45;
-  opacity: var(--opacity-subtle);
-  margin: 0;
   max-width: 50ch;
 }
 
@@ -61,7 +59,7 @@
 }
 
 /* ============================================================
-   MOBILE (≤768px) — photo first, bio below
+   MOBILE (≤ $bp-md) — photo first, bio below
    ============================================================ */
 .mAbout {
   display: flex;

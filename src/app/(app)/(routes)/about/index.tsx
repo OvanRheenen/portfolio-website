@@ -6,6 +6,7 @@ import styles from './About.module.scss'
 import Split from '@app/components/ui/Split'
 import type { Bio } from '@/services/about'
 import { useIsMobile } from '@app/components/hooks/useMediaQuery'
+import { BP_MD } from '@app/lib/breakpoints'
 
 const ASPECT = 5 / 4 // .photo height / width
 const MIN_GAP = 17 // min center distance, in width-% units
@@ -41,7 +42,7 @@ export default function AboutBody({ bio, count }: Props) {
 
   const photo = (
     <div className={styles.photo}>
-      {bio.photoUrl && <Image src={bio.photoUrl} alt="Portrait" loading="eager" fill sizes="(max-width: 768px) 72vw, 400px" />}
+      {bio.photoUrl && <Image src={bio.photoUrl} alt="Portrait" loading="eager" fill sizes={`(max-width: ${BP_MD}px) 72vw, 400px`} />}
       {punches?.map((p, i) => (
         <span
           key={i}

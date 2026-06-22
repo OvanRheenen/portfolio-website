@@ -7,15 +7,9 @@
 	--foreground: #171717;
 
 	--header-height: 60px;
-	--header-bg: var(--background);
-	--header-text: var(--foreground);
-	--header-font: var(--font-main);
 	--header-font-size: 2.5rem;
 
 	--footer-height: 60px;
-	--footer-bg: var(--background);
-	--footer-text: var(--foreground);
-	--footer-font: var(--font-main);
 	--footer-font-size: 1.75rem;
 
 	--header-nav-item-spacing: 2rem;
@@ -37,14 +31,6 @@
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-main);
 	--font-mono: var(--font-geist-mono);
-}
-
-/* TODO remove, only here for the developer's eyes */
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
 }
 
 *,
@@ -69,9 +55,7 @@ main {
 }
 
 header {
-	background: var(--header-bg);
-	color: var(--header-text);
-	font-family: var(--header-font);
+	background: var(--background);
 	font-size: var(--header-font-size);
 
 	position: fixed;
@@ -88,9 +72,7 @@ header {
 }
 
 footer {
-	background: var(--footer-bg);
-	color: var(--footer-text);
-	font-family: var(--footer-font);
+	background: var(--background);
 	font-size: var(--footer-font-size);
 
 	position: fixed;

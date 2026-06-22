@@ -1,0 +1,15 @@
+// Shared text patterns reused across route modules.
+
+// Uppercase tracked label (kicker / meta line).
+%meta-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: var(--opacity-muted);
+}
+
+// Body copy paragraph.
+%body-text {
+  line-height: 1.45;
+  opacity: var(--opacity-subtle);
+  margin: 0;
+}

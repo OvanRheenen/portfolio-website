@@ -1,3 +1,5 @@
+@use '@app/styles/breakpoints' as *;
+
 .body {
 	position: absolute;
 	inset: 0;
@@ -5,13 +7,7 @@
 	overflow: hidden;
 }
 
-.left {
-	position: relative;
-	width: var(--split-width);
-	height: 100%;
-	padding: 0 var(--bar-padding);
-}
-
+.left,
 .right {
 	position: relative;
 	width: var(--split-width);
@@ -20,7 +16,7 @@
 }
 
 /* below md the split hands off to a single stacked column */
-@media (max-width: 768px) { // TODO remove hardcoded breakpoint
+@media (max-width: $bp-md) {
 	.body {
 		flex-direction: column;
 	}

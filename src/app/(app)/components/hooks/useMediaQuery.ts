@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { BP_MD } from '@app/lib/breakpoints'
 
 // Subscribes to a CSS media query. Returns `null` until mounted so SSR and the
 // first client render agree (matchMedia is unavailable on the server); callers
@@ -21,5 +22,5 @@ export function useMediaQuery(query: string) {
 
 // Tracks whether the viewport is at/below the mobile breakpoint.
 export function useIsMobile() {
-  return useMediaQuery('(max-width: 768px)')
+  return useMediaQuery(`(max-width: ${BP_MD}px)`)
 }
