@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import styles from './Homepage.module.scss'
-import { Dotfield, SelectedPanel, WorkPreview, WorkGallery } from './components'
+import { Dotfield, SelectedPanel, WorkPreview, WorkGallery, MobileHome } from './components'
 import { useFilter, resetFilter } from './components/filterStore'
 import type { Work } from './components/types'
 import Split from '@app/components/ui/Split'
+import { useIsMobile } from '@app/components/hooks/useMediaQuery'
 
 function randomPositions(count: number) {
   return Array.from({ length: count }, () => ({
@@ -21,6 +22,7 @@ export default function HomepageBody({ works }: Props) {
   const [selected, setSelected] = useState<string | null>(null)
   const [positions, setPositions] = useState<Array<{ x: number; y: number }> | null>(null)
   const { effective } = useFilter()
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     // Client-only: randomPositions uses Math.random(), so it must run after mount
@@ -37,6 +39,11 @@ export default function HomepageBody({ works }: Props) {
 
   const activeWork: Work | null = selectedWork
     ?? (hovered ? (works.find(w => w.id === hovered) ?? null) : null)
+
+  // null until mounted (matchMedia is client-only) — render nothing to keep
+  // SSR and first client render in sync, matching the dotfield's deferred paint.
+  if (isMobile === null) return null
+  if (isMobile) return <MobileHome works={works} />
 
   return (
     <Split

@@ -122,3 +122,124 @@
   height: auto;
   display: block;
 }
+
+/* ============================================================
+   MOBILE (≤768px) — dedicated narrow-screen layout
+   ============================================================ */
+.mobile {
+  display: flex;
+  flex-direction: column;
+}
+
+/* condensed dot field below the header */
+.mDotfield {
+  position: relative;
+  height: 150px;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mDot {
+  @extend %dot-base;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition: transform var(--transition-fast) ease;
+
+  &:active { transform: translate(-50%, -50%) scale(0.85); }
+}
+
+/* sticky work-nav — pinned under the header, hidden until scrolled past dots */
+.mStrip {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: var(--m-strip-height);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 var(--bar-padding) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: var(--background);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 7px 14px -12px color-mix(in srgb, var(--foreground) 70%, transparent);
+  scrollbar-width: none;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--transition-fast) ease, opacity var(--transition-fast) ease;
+
+  &::-webkit-scrollbar { height: 0; }
+
+  &[data-shown="1"] {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.mStripDot {
+  @extend %dot-base;
+  flex: 0 0 auto;
+}
+
+.mWorks {
+  display: flex;
+  flex-direction: column;
+}
+
+.mWork {
+  padding-bottom: 1.25rem;
+  /* land below the fixed header + sticky strip when scrolled to */
+  scroll-margin-top: calc(var(--header-height) + var(--m-strip-height) + 8px);
+}
+
+/* full-bleed past main's padding */
+.mWorkImg {
+  position: relative;
+  margin: 0 calc(-1 * var(--bar-padding));
+  aspect-ratio: 4 / 5;
+}
+
+.mGallery {
+  margin: 0 calc(-1 * var(--bar-padding));
+}
+
+.mTrack {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.mSlide {
+  position: relative;
+  flex: 0 0 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.mWorkMeta {
+  font-family: var(--font-geist-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: var(--opacity-muted);
+  margin: 0.7rem 0 0.25rem;
+}
+
+.mWorkTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+
+.mWorkDesc {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: var(--opacity-subtle);
+  margin: 0;
+}
