@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from '../Homepage.module.scss'
 import { useFilter } from './filterStore'
+import { useWorkParam } from './useWorkParam'
 import type { Work } from './types'
 import { isVideo } from '@/services/media'
 import ProjectMedia from './ProjectMedia'
@@ -40,6 +41,7 @@ const cssPx = (name: string, fallback: number) =>
 
 export default function MobileHome({ works }: Props) {
   const { effective } = useFilter()
+  const [openWork, setWork] = useWorkParam()
   const [positions, setPositions] = useState<Array<{ x: number; y: number }> | null>(null)
   const [stripShown, setStripShown] = useState(false)
 
@@ -79,6 +81,15 @@ export default function MobileHome({ works }: Props) {
     document.getElementById(`mwork-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  // Restore position on load: if the URL names a work, scroll to it once.
+  useEffect(() => {
+    if (!openWork) return
+    if (!works.some(w => w.id === openWork)) return
+    requestAnimationFrame(() => scrollToWork(openWork))
+    // run once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const isFaded = (work: Work) => !!effective && work.category !== effective
 
   // Shared punchhole-dot button for the scatter field and the sticky strip.
@@ -92,7 +103,7 @@ export default function MobileHome({ works }: Props) {
       className={`${opts.className} ${isFaded(work) ? styles.isFaded : ''}`}
       style={opts.style}
       aria-label={work.title}
-      onClick={() => scrollToWork(work.id)}
+      onClick={() => { setWork(work.id); scrollToWork(work.id) }}
     >
       <Image
         src={work.punchholeUrl}

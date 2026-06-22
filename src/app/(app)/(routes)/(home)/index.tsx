@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import styles from './Homepage.module.scss'
 import { Dotfield, SelectedPanel, WorkPreview, WorkGallery, MobileHome } from './components'
 import { useFilter, resetFilter } from './components/filterStore'
+import { useWorkParam } from './components/useWorkParam'
 import type { Work } from './components/types'
 import Split from '@app/components/ui/Split'
 import { useIsMobile } from '@app/components/hooks/useMediaQuery'
@@ -19,7 +20,7 @@ type Props = { works: Work[] }
 
 export default function HomepageBody({ works }: Props) {
   const [hovered, setHovered] = useState<string | null>(null)
-  const [selected, setSelected] = useState<string | null>(null)
+  const [selected, setSelected] = useWorkParam()
   const [positions, setPositions] = useState<Array<{ x: number; y: number }> | null>(null)
   const { effective } = useFilter()
   const isMobile = useIsMobile()
@@ -47,7 +48,7 @@ export default function HomepageBody({ works }: Props) {
 
   return (
     <Split
-      leftClassName={selected ? styles.leftSelected : undefined}
+      leftClassName={selectedWork ? styles.leftSelected : undefined}
       left={
         selected && selectedWork ? (
           <SelectedPanel
