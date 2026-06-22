@@ -28,14 +28,19 @@ export function mediaUrl(media: number | Media | null | undefined): string {
   return `${base}/${bucket}/${prefix}/${encodeURIComponent(media.filename)}`
 }
 
-export type MediaAsset = { url: string; width: number; height: number }
+export type MediaAsset = { url: string; width: number; height: number; mimeType: string }
 
 /**
- * Build a `next/image`-ready asset (url + intrinsic dimensions) for a populated Media doc.
- * Throws (via `mediaUrl`) if the media is not populated.
+ * Build a `next/image`/`<video>`-ready asset (url + intrinsic dimensions + mimeType)
+ * for a populated Media doc. Throws (via `mediaUrl`) if the media is not populated.
+ * Video uploads have no sharp dimensions, so width/height fall back to 0.
  */
 export function mediaAsset(media: number | Media | null | undefined): MediaAsset {
   const url = mediaUrl(media)
-  const { width, height } = media as Media
-  return { url, width: width ?? 0, height: height ?? 0 }
+  const { width, height, mimeType } = media as Media
+  return { url, width: width ?? 0, height: height ?? 0, mimeType: mimeType ?? '' }
+}
+
+export function isVideo(a: MediaAsset): boolean {
+  return a.mimeType.startsWith('video/')
 }

@@ -69,7 +69,7 @@ export const Works: CollectionConfig = {
 			hasMany: true,
 		 	label: 'Project Display Images',
 			admin: {
-				description: 'These images will be used in the project detail view, after a user has clicked on a project dot.',
+				description: 'Images or videos (.mp4 / .webm) shown in the project detail view after a user clicks a project dot. Videos autoplay muted on loop. Order here is the display order.',
 			},
 		},
   ],
