@@ -5,7 +5,9 @@
 	a {
 		color: inherit;
 		cursor: pointer;
-		&:hover { text-decoration: underline; }
+		@media (hover: hover) {
+			&:hover { text-decoration: underline; }
+		}
 	}
 }
 
@@ -20,6 +22,8 @@
 	a {
 		color: inherit;
 		cursor: pointer;
-		&:hover { text-decoration: underline; }
+		@media (hover: hover) {
+			&:hover { text-decoration: underline; }
+		}
 	}
 }
