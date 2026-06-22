@@ -9,8 +9,18 @@
   transition: opacity var(--transition-fast) ease;
 }
 
+%meta-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: var(--opacity-muted);
+}
+
 .cover {
   object-fit: cover;
+}
+
+.previewImage {
+  object-fit: contain;
 }
 
 .isFaded {
@@ -86,10 +96,8 @@
 }
 
 .meta {
-  font-size: 0.7rem;
-  opacity: var(--opacity-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  @extend %meta-label;
+  font-size: 1rem;
   font-family: var(--font-main);
 }
 
@@ -101,25 +109,26 @@
 }
 
 .text {
-  font-size: 0.875rem;
-  line-height: 1.7;
+  font-size: 1.2rem;
+  line-height: 1.45;
   opacity: var(--opacity-subtle);
   margin: 0;
+  white-space: pre-line;
 }
 
 .gallery {
   height: 100%;
-  overflow-y: auto;
+  overflow: auto;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 1rem;
   padding: 1rem 0;
   animation: fadeIn var(--transition-fast) ease;
 }
 
 .projectImage {
-  width: 100%;
-  height: auto;
+  flex-shrink: 0;
   display: block;
 }
 
@@ -223,11 +232,9 @@
 }
 
 .mWorkMeta {
+  @extend %meta-label;
   font-family: var(--font-geist-mono);
   font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  opacity: var(--opacity-muted);
   margin: 0.7rem 0 0.25rem;
 }
 
@@ -242,4 +249,5 @@
   line-height: 1.5;
   opacity: var(--opacity-subtle);
   margin: 0;
+  white-space: pre-line;
 }

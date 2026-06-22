@@ -13,7 +13,7 @@ export default function WorkPreview({ work }: Props) {
         fill
         // 50/50 Split above 768px, then single column below — keep in sync with Split.module.scss
         sizes="(max-width: 768px) 100vw, 50vw"
-        className={styles.cover}
+        className={styles.previewImage}
       />
     </div>
   )
