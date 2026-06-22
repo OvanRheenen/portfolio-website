@@ -24,23 +24,27 @@ Next.js 16 App Router + Payload CMS 3 in a **single Next app**. Payload is mount
 `src/app/` uses two route groups:
 
 - `src/app/(app)/` — public site (frontend):
-  - `(routes)/` — page routes (`about/`, `contact/`)
+  - `(routes)/` — page routes: `(home)/` (route group), `about/`, `contact/`
   - `components/layout/` — Header, Footer (each with SCSS module + `index.tsx`)
-  - `components/ui/` — shared UI primitives
-  - `globals.css`, `layout.tsx`, `page.tsx` (home)
+  - `components/ui/`, `components/hooks/` — shared UI primitives + hooks
+  - `globals.css`, `layout.tsx`
 - `src/app/(payload)/` — Payload-owned routes. **Auto-generated, do not edit by hand**. Only safe to edit: `custom.scss`.
 
-Make CMS changes via `payload.config.ts`, then regenerate types.
+**Route file pattern**: each route dir has `page.tsx` (server: fetches via `src/services/`, sets `revalidate`) + `index.tsx` (the client/body component it renders).
+
+Make CMS changes via `src/payload.config.ts` + `src/collections/` / `src/globals/`, then regenerate types.
 
 ### Payload config
 
-`payload.config.ts` is the single source of truth for collections, globals, and DB.
+`src/payload.config.ts` wires DB, storage, and imports collections/globals from sibling dirs.
 
 - DB: Postgres via `@payloadcms/db-postgres`, connection from `SUPABASE_URI`.
 - Storage: S3 via `@payloadcms/storage-s3` for media uploads.
 - Editor: Lexical (`@payloadcms/richtext-lexical`).
-- Collections: `Works` (title, description, category, active, two media upload fields) and `Media` (upload + altText).
-- TS path aliases: `@/*` → `src/`, `@payload-config` → `./payload.config.ts`.
+- Collections (`src/collections/`): `Works` (title, description, year, category, medium, active, media upload fields incl. video) and `Media` (upload + altText).
+- Globals (`src/globals/`): `About`, `Contact`.
+- Data fetching: `src/services/` (works, about, contact, media) wrap `getPayload`; called from route `page.tsx`. Don't call Payload directly in components.
+- TS path aliases: `@/*` → `src/`, `@app/*` → `src/app/(app)/`, `@payload-config` → `./src/payload.config.ts`.
 
 Required env vars (`.env.local`): `PAYLOAD_SECRET`, `SUPABASE_URI`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_REGION`, `S3_ENDPOINT`.
 
