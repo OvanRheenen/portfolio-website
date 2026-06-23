@@ -49,10 +49,16 @@ export default function MobileHome({ works }: Props) {
 
   useEffect(() => {
     // Client-only: Math.random() + measured box would mismatch SSR.
-    const field = dotfieldRef.current
-    if (!field) return
-    const { width, height } = field.getBoundingClientRect()
-    setPositions(scatterDots(works.length, width, height, cssPx('--dot-size', 30)))
+    const scatter = () => {
+      const field = dotfieldRef.current
+      if (!field) return
+      const { width, height } = field.getBoundingClientRect()
+      setPositions(scatterDots(works.length, width, height, cssPx('--dot-size', 30)))
+    }
+    scatter()
+    // Header title click re-scatters the dotfield without a reload.
+    window.addEventListener('reshuffle', scatter)
+    return () => window.removeEventListener('reshuffle', scatter)
   }, [works.length])
 
   // Reveal the sticky strip once the dot field has scrolled out from under the header.

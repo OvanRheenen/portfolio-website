@@ -9,20 +9,24 @@ export default function Header() {
 	const pathname = usePathname();
 	const title = "Nina Merk";
 
+	const onTitleClick = (e: React.MouseEvent) => {
+		if (pathname !== "/") return; // let the Link navigate
+		e.preventDefault();
+		if (window.location.search) {
+			window.history.pushState({}, "", "/");
+			window.dispatchEvent(new PopStateEvent("popstate"));
+		}
+		// re-scatter the dotfield without a reload (home listens for this)
+		window.dispatchEvent(new Event("reshuffle"));
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+
 	return (
 		<header>
-			{pathname === "/" ? (
-				<>
-					<div className={styles.headerTitle}>
-						{title}
-					</div>
-					<HomeHeaderNav />
-				</>
-			) : (
-				<div className={styles.headerTitle}>
-					<Link href="/">{title}</Link>
-				</div>
-			)}
+			<div className={styles.headerTitle}>
+					<Link href="/" onClick={onTitleClick}>{title}</Link>
+			</div>
+			{pathname === "/" && <HomeHeaderNav />}
 		</header>
 	);
 }

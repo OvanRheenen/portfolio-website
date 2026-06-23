@@ -30,6 +30,10 @@ export default function HomepageBody({ works }: Props) {
     // to avoid a server/client hydration mismatch.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPositions(randomPositions(works.length))
+    // Header title click re-scatters the dotfield without a reload.
+    const reshuffle = () => setPositions(randomPositions(works.length))
+    window.addEventListener('reshuffle', reshuffle)
+    return () => window.removeEventListener('reshuffle', reshuffle)
   }, [works.length])
 
   useEffect(() => resetFilter, [])
