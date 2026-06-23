@@ -9,7 +9,7 @@ export default function WorkPreview({ work }: Props) {
   return (
     <div className={styles.image}>
       <Image
-        src={work.previewUrl}
+        src={work.preview.url}
         alt={work.title}
         fill
         // 50/50 Split above the md breakpoint, then single column below

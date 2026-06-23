@@ -199,14 +199,15 @@
 }
 
 /* full-bleed past main's padding */
-.mWorkImg {
-  position: relative;
-  margin: 0 calc(-1 * var(--bar-padding));
-  aspect-ratio: 4 / 5;
-}
-
+.mWorkImg,
 .mGallery {
   margin: 0 calc(-1 * var(--bar-padding));
+}
+
+.mWorkMedia {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .mTrack {
@@ -219,9 +220,15 @@
 }
 
 .mSlide {
-  position: relative;
-  flex: 0 0 100%;
-  aspect-ratio: 4 / 5;
+  flex: 0 0 auto;
+  height: 60vh;
+  width: auto;
+}
+
+.mGalleryMedia {
+  height: 100%;
+  width: auto;
+  display: block;
 }
 
 .mWorkMeta {

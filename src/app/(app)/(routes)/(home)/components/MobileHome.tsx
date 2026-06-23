@@ -150,7 +150,7 @@ export default function MobileHome({ works }: Props) {
                 <div className={styles.mTrack}>
                   {work.projectImages.map(img => (
                     <div key={img.url} className={styles.mSlide}>
-                      <ProjectMedia asset={img} title={work.title} fill sizes="100vw" className={styles.cover} />
+                      <ProjectMedia asset={img} title={work.title} sizes="100vw" className={styles.mGalleryMedia} />
                     </div>
                   ))}
                 </div>
@@ -159,9 +159,9 @@ export default function MobileHome({ works }: Props) {
               <div className={styles.mWorkImg}>
                 {/* single video plays inline; otherwise show the curated preview image */}
                 {work.projectImages.length === 1 && isVideo(work.projectImages[0]) ? (
-                  <ProjectMedia asset={work.projectImages[0]} title={work.title} fill className={styles.cover} />
+                  <ProjectMedia asset={work.projectImages[0]} title={work.title} className={styles.mWorkMedia} />
                 ) : (
-                  <Image src={work.previewUrl} alt={work.title} fill sizes="100vw" className={styles.cover} />
+                  <ProjectMedia asset={work.preview} title={work.title} sizes="100vw" className={styles.mWorkMedia} />
                 )}
               </div>
             )}

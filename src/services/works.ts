@@ -10,7 +10,7 @@ export type Work = {
   category: '2d' | '3d'
 	medium: string
   punchholeUrl: string
-  previewUrl: string
+  preview: MediaAsset
   projectImages: MediaAsset[]
 }
 
@@ -35,7 +35,7 @@ export async function getWorks(): Promise<Work[]> {
           category: w.category,
           medium: w.medium,
           punchholeUrl: mediaUrl(w.punchholeImage),
-          previewUrl: mediaUrl(w.previewImage),
+          preview: mediaAsset(w.previewImage),
           projectImages: (w.projectImages ?? []).map(mediaAsset),
         }
       } catch (err) {
