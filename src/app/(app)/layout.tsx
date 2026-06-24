@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Catamaran } from "next/font/google";
 import { Header, Footer } from "@app/components/layout";
+import { Analytics } from "@vercel/analytics/next";
 
 const catamaran = Catamaran({
 	variable: '--font-catamaran',
@@ -32,6 +33,7 @@ export default function RootLayout({
 				<main>{children}</main>
 				<Footer />
 			</body>
+			<Analytics />
     </html>
   );
 }
