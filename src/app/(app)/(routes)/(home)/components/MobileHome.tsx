@@ -6,7 +6,6 @@ import styles from '../Homepage.module.scss'
 import { useFilter } from './filterStore'
 import { useWorkParam } from './useWorkParam'
 import type { Work } from './types'
-import { isVideo } from '@/services/media'
 import ProjectMedia from './ProjectMedia'
 
 type Props = { works: Work[] }
@@ -157,9 +156,8 @@ export default function MobileHome({ works }: Props) {
               </div>
             ) : (
               <div className={styles.mWorkImg}>
-                {/* single video plays inline; otherwise show the curated preview image */}
-                {work.projectImages.length === 1 && isVideo(work.projectImages[0]) ? (
-                  <ProjectMedia asset={work.projectImages[0]} title={work.title} className={styles.mWorkMedia} />
+                {work.projectImages.length === 1 ? (
+                  <ProjectMedia asset={work.projectImages[0]} title={work.title} sizes="100vw" className={styles.mWorkMedia} />
                 ) : (
                   <ProjectMedia asset={work.preview} title={work.title} sizes="100vw" className={styles.mWorkMedia} />
                 )}
