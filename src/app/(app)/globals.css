@@ -19,6 +19,7 @@
 	--split-width: 50%;
 
 	--dot-size: 30px;
+	--dot-hover-buffer: 7px;
 	--m-strip-height: 50px;
 	--opacity-muted: 0.45;
 	--opacity-subtle: 0.65;

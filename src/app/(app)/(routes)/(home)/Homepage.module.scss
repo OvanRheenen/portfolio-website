@@ -28,6 +28,19 @@
   @extend %dot-base;
 	position: absolute;
   transform: translate(-50%, -50%);
+  // overflow must stay visible so the ::before hover buffer extends past the dot.
+  // the image is clipped by border-radius on .cover instead.
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--dot-hover-buffer) * -1);
+  }
+
+  .cover {
+    border-radius: 50%;
+  }
 }
 
 .image {
