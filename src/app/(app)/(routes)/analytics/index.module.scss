@@ -1,0 +1,146 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.heading {
+	font-size: 1.75rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ranges {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.customRange {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dateInput {
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.applyBtn {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid #111;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font-size: 0.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.rangeBtn {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: #555;
+  text-decoration: none;
+  font-size: 0.8rem;
+  line-height: 1;
+
+  &:hover {
+    border-color: #aaa;
+  }
+}
+
+.rangeBtnActive {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+.range {
+	font-size: 1rem;
+  color: #777;
+  margin-bottom: 2rem;
+}
+
+.totals {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+}
+
+.totalValue {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.totalLabel {
+  color: #777;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  margin-bottom: 0.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  td.num,
+  th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.notice {
+  color: #777;
+  font-style: italic;
+}
+
+.error {
+  background: #fff4f4;
+  border: 1px solid #f3d0d0;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
