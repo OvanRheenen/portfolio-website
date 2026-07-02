@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import styles from './Homepage.module.scss'
 import { Dotfield, SelectedPanel, WorkPreview, WorkGallery, MobileHome } from './components'
+import { PreloadPreviews } from './components/WorkPreview'
 import { useFilter, resetFilter } from './components/filterStore'
 import { useWorkParam } from './components/useWorkParam'
 import type { Work } from './components/types'
@@ -51,41 +52,44 @@ export default function HomepageBody({ works }: Props) {
   if (isMobile) return <MobileHome works={works} />
 
   return (
-    <Split
-      leftClassName={selectedWork ? styles.leftSelected : undefined}
-      left={
-        selected && selectedWork ? (
-          <SelectedPanel
-            works={works}
-            selectedWork={selectedWork}
-            filter={effective}
-            onClose={() => { setSelected(null); setHovered(null) }}
-            onSelect={setSelected}
-          />
-        ) : (
-          positions && (
-            <Dotfield
+    <>
+      <PreloadPreviews works={works} />
+      <Split
+        leftClassName={selectedWork ? styles.leftSelected : undefined}
+        left={
+          selected && selectedWork ? (
+            <SelectedPanel
               works={works}
-              positions={positions}
+              selectedWork={selectedWork}
               filter={effective}
-              onHover={setHovered}
-              onSelect={(id) => { setHovered(null); setSelected(id) }}
+              onClose={() => { setSelected(null); setHovered(null) }}
+              onSelect={setSelected}
             />
+          ) : (
+            positions && (
+              <Dotfield
+                works={works}
+                positions={positions}
+                filter={effective}
+                onHover={setHovered}
+                onSelect={(id) => { setHovered(null); setSelected(id) }}
+              />
+            )
           )
-        )
-      }
-      right={
-        selected && selectedWork && selectedWork.projectImages.length > 0 ? (
-          <WorkGallery key={selected} work={selectedWork} />
-        ) : (
-          activeWork && (
-            <WorkPreview
-              key={selected ?? hovered}
-              work={activeWork}
-            />
+        }
+        right={
+          selected && selectedWork && selectedWork.projectImages.length > 0 ? (
+            <WorkGallery key={selected} work={selectedWork} />
+          ) : (
+            activeWork && (
+              <WorkPreview
+                key={selected ?? hovered}
+                work={activeWork}
+              />
+            )
           )
-        )
-      }
-    />
+        }
+      />
+    </>
   )
 }
