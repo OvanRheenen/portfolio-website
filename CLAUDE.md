@@ -10,8 +10,8 @@ Package manager: **pnpm** (lockfile: `pnpm-lock.yaml`).
 - `pnpm build` — production build
 - `pnpm start` — serve built app
 - `pnpm lint` — ESLint (flat config, extends `eslint-config-next` core-web-vitals + typescript)
-- `pnpm dlx payload generate:types` — regenerate `payload-types.ts` after editing collections in `payload.config.ts`
-- `pnpm dlx payload generate:importmap` — regenerate `app/(payload)/admin/importMap.js` after adding custom admin components
+- `pnpm payload generate:types` — regenerate `payload-types.ts` after editing collections in `payload.config.ts`
+- `pnpm payload generate:importmap` — regenerate `app/(payload)/admin/importMap.js` after adding custom admin components
 
 No test runner configured.
 
@@ -27,10 +27,18 @@ Next.js 16 App Router + Payload CMS 3 in a **single Next app**. Payload is mount
   - `(routes)/` — page routes: `(home)/` (route group), `about/`, `contact/`
   - `components/layout/` — Header, Footer (each with SCSS module + `index.tsx`)
   - `components/ui/`, `components/hooks/` — shared UI primitives + hooks
+  - `data/` — static mock data (`MOCK_WORKS`), separate from live Payload fetches in `src/services/`
   - `globals.css`, `layout.tsx`
 - `src/app/(payload)/` — Payload-owned routes. **Auto-generated, do not edit by hand**. Only safe to edit: `custom.scss`.
 
 **Route file pattern**: each route dir has `page.tsx` (server: fetches via `src/services/`, sets `revalidate`) + `index.tsx` (the client/body component it renders).
+
+### Styling
+
+Two systems coexist:
+
+- **Tailwind CSS 4** — CSS-first config, no `tailwind.config` file. `src/app/(app)/globals.css` does `@import "tailwindcss"` + `@theme inline`. Design tokens = CSS custom props in `:root` there. PostCSS: `@tailwindcss/postcss` (`postcss.config.mjs`).
+- **SCSS modules** — per-component `*.module.scss`. Shared partials in `src/app/(app)/styles/` (`_breakpoints`, `_typography`). Breakpoints mirrored in TS at `(app)/lib/breakpoints.ts` — keep both in sync.
 
 Make CMS changes via `src/payload.config.ts` + `src/collections/` / `src/globals/`, then regenerate types.
 
