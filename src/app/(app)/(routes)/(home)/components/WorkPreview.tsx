@@ -2,6 +2,8 @@ import Image, { getImageProps } from 'next/image'
 import { useEffect } from 'react'
 import styles from '../Homepage.module.scss'
 import { BP_MD } from '@app/lib/breakpoints'
+import { isVideo } from '@/services/media'
+import { preloadVideo } from './videoPreload'
 import type { Work } from './types'
 
 // 50/50 Split above the md breakpoint, then single column below
@@ -23,10 +25,15 @@ export default function WorkPreview({ work }: Props) {
   )
 }
 
-// To preload all the preview images on the homepage, so they appear instantly on hover.
+// To preload all the preview images on the homepage, so they appear instantly
+// on hover. Project display videos are preloaded too.
 export function PreloadPreviews({ works }: { works: Work[] }) {
   useEffect(() => {
     for (const work of works) {
+      for (const asset of work.projectImages) {
+        if (isVideo(asset)) preloadVideo(asset.url)
+      }
+
       const { props } = getImageProps({
         src: work.preview.url,
         alt: '',
