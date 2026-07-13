@@ -42,7 +42,7 @@ export default function AboutBody({ bio, count }: Props) {
 
   const photo = (
     <div className={styles.photo}>
-      {bio.photoUrl && <Image src={bio.photoUrl} alt="Portrait" loading="eager" fill sizes={`(max-width: ${BP_MD}px) 72vw, 400px`} />}
+      {bio.photoUrl && <Image src={bio.photoUrl} alt="Portrait of Nina Merk" loading="eager" fill sizes={`(max-width: ${BP_MD}px) 72vw, 400px`} />}
       {punches?.map((p, i) => (
         <span
           key={i}

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Catamaran } from "next/font/google";
 import { Header, Footer } from "@app/components/layout";
 import { Analytics } from "@vercel/analytics/next";
+import { SITE_URL } from "@app/lib/site";
 
 const catamaran = Catamaran({
 	variable: '--font-catamaran',
@@ -11,9 +12,22 @@ const catamaran = Catamaran({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Nina Merk",
-  description: "Works, about and contact info of Nina Merk, a multidisciplinary artist.",
-	icons: {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Nina Merk — Mixed Media Artist and Set Designer",
+    template: "%s — Nina Merk",
+  },
+  description:
+    "Selected works by Nina Merk, a mixed media artist and set designer.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    siteName: "Nina Merk",
+    type: "website",
+    locale: "en_US",
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
+  icons: {
     icon: "/favicon.ico",
   },
 };

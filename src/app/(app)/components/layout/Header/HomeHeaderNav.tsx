@@ -15,16 +15,17 @@ export default function HomeHeaderNav() {
 			{CATEGORIES.map((cat) => {
 				const isLocked = locked === cat;
 				return (
-					<a
+					<button
 						key={cat}
-						aria-current={isLocked ? 'true' : undefined}
+						type="button"
+						aria-pressed={isLocked}
 						style={(isLocked ? { textDecoration: 'underline' } : {})}
 						onMouseEnter={canHover ? () => setHover(cat) : undefined}
 						onMouseLeave={canHover ? () => setHover(null) : undefined}
-						onClick={(e) => { e.preventDefault(); toggleLock(cat); }}
+						onClick={() => toggleLock(cat)}
 					>
 					{cat.toUpperCase()}
-					</a>
+					</button>
 				);
 			})}
 		</nav>
