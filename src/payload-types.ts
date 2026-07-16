@@ -75,7 +75,13 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    media: {
+      usedAsPreview: 'works';
+      usedAsPunchhole: 'works';
+      usedInProject: 'works';
+    };
+  };
   collectionsSelect: {
     media: MediaSelect<false> | MediaSelect<true>;
     works: WorksSelect<false> | WorksSelect<true>;
@@ -132,6 +138,21 @@ export interface UserAuthOperations {
 export interface Media {
   id: number;
   altText?: string | null;
+  usedAsPreview?: {
+    docs?: (number | Work)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  usedAsPunchhole?: {
+    docs?: (number | Work)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  usedInProject?: {
+    docs?: (number | Work)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -288,6 +309,9 @@ export interface PayloadMigration {
  */
 export interface MediaSelect<T extends boolean = true> {
   altText?: T;
+  usedAsPreview?: T;
+  usedAsPunchhole?: T;
+  usedInProject?: T;
   prefix?: T;
   updatedAt?: T;
   createdAt?: T;

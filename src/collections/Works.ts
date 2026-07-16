@@ -3,6 +3,9 @@ import { CollectionConfig } from 'payload';
 export const Works: CollectionConfig = {
   slug: 'works',
 	orderable: true,
+	admin: {
+		useAsTitle: 'title',
+	},
   fields: [
     {
       name: 'title',

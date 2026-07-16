@@ -13,9 +13,36 @@ export const Media: CollectionConfig = {
 		],
   },
   fields: [
-    { 
+    {
 			name: 'altText',
-			type: 'text' 
+			type: 'text'
+		},
+		{
+			name: 'usedAsPreview',
+			type: 'join',
+			collection: 'works',
+			on: 'previewImage',
+			admin: {
+				allowCreate: false,
+			},
+		},
+		{
+			name: 'usedAsPunchhole',
+			type: 'join',
+			collection: 'works',
+			on: 'punchholeImage',
+			admin: {
+				allowCreate: false,
+			},
+		},
+		{
+			name: 'usedInProject',
+			type: 'join',
+			collection: 'works',
+			on: 'projectImages',
+			admin: {
+				allowCreate: false,
+			},
 		},
   ],
 };
