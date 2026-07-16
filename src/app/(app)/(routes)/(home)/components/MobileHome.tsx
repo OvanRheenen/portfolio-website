@@ -142,32 +142,32 @@ export default function MobileHome({ works }: Props) {
       </div>
 
       <div className={styles.mWorks}>
-        {works.map(work => (
-          <article key={work.id} id={`mwork-${work.id}`} className={styles.mWork}>
-            {work.projectImages.length > 1 ? (
-              <div className={styles.mGallery}>
-                <div className={styles.mTrack}>
-                  {work.projectImages.map(img => (
-                    <div key={img.url} className={styles.mSlide}>
-                      <ProjectMedia asset={img} title={work.title} sizes="100vw" className={styles.mGalleryMedia} />
-                    </div>
-                  ))}
+        {works.map(work => {
+          // Preview (the image the dot is cut from) leads the gallery.
+          const slides = [work.preview, ...work.projectImages]
+          return (
+            <article key={work.id} id={`mwork-${work.id}`} className={styles.mWork}>
+              {slides.length > 1 ? (
+                <div className={styles.mGallery}>
+                  <div className={styles.mTrack}>
+                    {slides.map((img, i) => (
+                      <div key={`${img.url}-${i}`} className={styles.mSlide}>
+                        <ProjectMedia asset={img} title={work.title} sizes="100vw" className={styles.mGalleryMedia} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className={styles.mWorkImg}>
-                {work.projectImages.length === 1 ? (
-                  <ProjectMedia asset={work.projectImages[0]} title={work.title} sizes="100vw" className={styles.mWorkMedia} />
-                ) : (
+              ) : (
+                <div className={styles.mWorkImg}>
                   <ProjectMedia asset={work.preview} title={work.title} sizes="100vw" className={styles.mWorkMedia} />
-                )}
-              </div>
-            )}
-            <p className={styles.mWorkMeta}>{work.medium} · {work.year}</p>
-            <h3 className={styles.mWorkTitle}>{work.title}</h3>
-            {work.description && <p className={styles.mWorkDesc}>{work.description}</p>}
-          </article>
-        ))}
+                </div>
+              )}
+              <p className={styles.mWorkMeta}>{work.medium} · {work.year}</p>
+              <h3 className={styles.mWorkTitle}>{work.title}</h3>
+              {work.description && <p className={styles.mWorkDesc}>{work.description}</p>}
+            </article>
+          )
+        })}
       </div>
     </div>
   )
