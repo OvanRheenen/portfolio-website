@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload';
 
 export const Works: CollectionConfig = {
   slug: 'works',
+	orderable: true,
   fields: [
     {
       name: 'title',
